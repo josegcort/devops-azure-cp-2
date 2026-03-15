@@ -1,0 +1,96 @@
+# =========================
+# Terraform
+# =========================
+
+# Directorio de providers
+.terraform/
+
+# Archivos de estado
+*.tfstate
+*.tfstate.*
+
+# Planes generados
+*.tfplan
+*.tfplan.*
+
+# Variables sensibles
+*.tfvars
+*.tfvars.json
+
+# Crash logs
+crash.log
+crash.*.log
+
+# Override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# CLI config
+.terraformrc
+terraform.rc
+
+# Ignora archivos de información de bloqueo transitorio creados por terraform apply
+.terraform.tfstate.lock.info
+
+# Lock files
+.terraform.lock.hcl
+
+# =========================
+# Ansible
+# =========================
+
+# Archivos de retry
+*.retry
+
+# Directorios temporales
+*.log
+
+# Vault password
+.vault_pass
+vault_pass.txt
+
+# Archivos temporales
+*.tmp
+
+# Ansible secrets e inventario
+ansible/secrets
+ansible/inventory.ini
+
+# =========================
+# Python (Ansible usa Python)
+# =========================
+
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.swp
+
+
+# =========================
+# Entornos virtuales
+# =========================
+
+venv/
+.env/
+.venv/
+
+
+# =========================
+# OS
+# =========================
+
+.DS_Store
+Thumbs.db
+
+
+# =========================
+# IDEs
+# =========================
+
+.vscode/
+.idea/
+*.iml
+
