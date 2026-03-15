@@ -25,17 +25,17 @@ variable "rg_name" {
 }
 
 # Variables para la creación del Storage Account apara el boot diagnostics
-variable "sabd_name" {
+variable "storagebd_name" {
   description = "Nombre del Storage Account a crear"
   type        = string
   default     = "stgbdcp2"
 }
-variable "sabd_cat" {
+variable "storagebd_cat" {
   description = "Categoria del Storage Account a crear"
   type        = string
   default     = "Standard"
 }
-variable "sabd_reply_type" {
+variable "storagebd_reply_type" {
   description = "Tipo de replicación del Storage Account a crear"
   type        = string
   default     = "LRS"
