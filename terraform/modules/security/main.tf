@@ -1,8 +1,8 @@
 # Definición del Security Group
 resource "azurerm_network_security_group" "secgroup" {
   name                = var.secgroup_name
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
+  location            = var.rg_location
+  resource_group_name = var.rg_name
 
   # Reglas de seguridad para permitir el tráfico entrante al puerto 22 (SSH)
   security_rule {
@@ -36,6 +36,6 @@ resource "azurerm_network_security_group" "secgroup" {
 
 # Asociación del Security Group a la interfaz de red
 resource "azurerm_network_interface_security_group_association" "vnetassosecgroup" {
-  network_interface_id      = azurerm_network_interface.nic.id
+  network_interface_id      = var.nic_id
   network_security_group_id = azurerm_network_security_group.secgroup.id
 }
