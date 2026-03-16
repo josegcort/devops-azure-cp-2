@@ -4,17 +4,22 @@ variable "subscription_id" {
   type        = string
   sensitive   = true
 }
+variable "tenant_id" {
+  description = "TenantId de Azure para autenticar el proveedor"
+  type        = string
+  sensitive   = true
+}
 
 #Variables generales para la creación de recursos en Azure
 variable "location" {
   description = "Region de Azure donde se desplegarán los recursos"
   type        = string
-  default     = "eastus"
+  default     = "chilecentral"
 }
 variable "tag" {
   description = "Valor de la etiqueta para los recursos a crear"
   type        = string
-  default     = "CP2"
+  default     = "casopractico2"
 }
 
 # Variables para la creación del ResourceGroup
@@ -74,7 +79,7 @@ variable "pub_ip_name" {
 variable "pub_ip_type" {
   description = "Tipo de asignación de la IP publica"
   type        = string
-  default     = "Dynamic"
+  default     = "Static"
 }
 variable "pub_ip_sku" {
   description = "Variante de la IP publica"
@@ -172,7 +177,7 @@ variable "vm_name" {
 variable "vm_size" {
   description = "Tipo o tamaño de la máquina virtual"
   type        = string
-  default     = "Standard_B2ls_v2"
+  default     = "Standard_B2s_v2"
 }
 variable "vm_username" {
   description = "Nombre del usuario administrador de la máquina virtual"
