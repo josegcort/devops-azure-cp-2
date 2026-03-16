@@ -4,6 +4,7 @@ resource "azurerm_network_security_group" "secgroup" {
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 
+  # Reglas de seguridad para permitir el tráfico entrante al puerto 22 (SSH)
   security_rule {
     name                       = var.rule_prot1_name
     priority                   = var.rule_prot1_priority
@@ -15,6 +16,7 @@ resource "azurerm_network_security_group" "secgroup" {
     source_address_prefix      = var.rule_allow_all
     destination_address_prefix = var.rule_allow_all
   }
+  # Reglas de seguridad para permitir el tráfico entrante al puerto 80 (HTTP)
   security_rule {
     name                       = var.rule_prot2_name
     priority                   = var.rule_prot2_priority
@@ -32,6 +34,7 @@ resource "azurerm_network_security_group" "secgroup" {
   }
 }
 
+# Asociación del Security Group a la interfaz de red
 resource "azurerm_network_interface_security_group_association" "vnetassosecgroup" {
   network_interface_id      = azurerm_network_interface.nic.id
   network_security_group_id = azurerm_network_security_group.secgroup.id
