@@ -1,13 +1,13 @@
 # Definición de la máquina virtual Linux
 resource "azurerm_linux_virtual_machine" "vm" {
   name                = var.vm_name
-  resource_group_name = azurerm_resource_group.rg.name
-  location            = azurerm_resource_group.rg.location
+  resource_group_name = var.rg_name
+  location            = var.rg_location
   size                = var.vm_size
   admin_username      = var.vm_username
   admin_password      = var.vm_password
   network_interface_ids = [
-    azurerm_network_interface.nic.id,
+    var.nic_id,
   ]
 
   # Configuración de la clave SSH para la autenticación en la máquina virtual
@@ -33,7 +33,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
 
   # Configuración de diagnósticos de arranque para la máquina virtual, utilizando una cuenta de almacenamiento creada previamente
   boot_diagnostics {
-    storage_account_uri = azurerm_storage_account.storagebd.primary_blob_endpoint
+    storage_account_uri = var.storagebd_primary_blob_endpoint
   }
 
   tags = {
