@@ -76,6 +76,11 @@ variable "pub_ip_type" {
   type        = string
   default     = "Dynamic"
 }
+variable "pub_ip_sku" {
+  description = "Variante de la IP publica"
+  type        = string
+  default     = "Standard"
+}
 
 # Variables para la creación de la NIC
 variable "nic_name" {
@@ -156,4 +161,66 @@ variable "rule_prot2_priority" {
   description = "Prioridad de la regla de seguridad para HTTP a crear"
   type        = number
   default     = 1002
+}
+
+# Variables para la creación de la Maquina Virtual y sus componentes
+variable "vm_name" {
+  description = "Nombre de la máquina virtual a crear"
+  type        = string
+  default     = "vmcp2"
+}
+variable "vm_size" {
+  description = "Tipo o tamaño de la máquina virtual"
+  type        = string
+  default     = "Standard_B2ls_v2"
+}
+variable "vm_username" {
+  description = "Nombre del usuario administrador de la máquina virtual"
+  type        = string
+  sensitive   = true
+}
+variable "vm_password" {
+  description = "Contraseña del usuario administrador de la máquina virtual"
+  type        = string
+  sensitive   = true
+}
+variable "ssh_pub_key" {
+  description = "Ruta del archivo de clave pública SSH para la autenticación en la máquina virtual"
+  type        = string
+  default     = "~/.ssh/vm.pub"
+}
+variable "osdisk_name" {
+  description = "Nombre del disco del sistema operativo de la máquina virtual"
+  type        = string
+  default     = "osdiskcp2"
+}
+variable "osdisk_ch" {
+  description = "Tipo de caché del disco del sistema operativo de la máquina virtual"
+  type        = string
+  default     = "ReadWrite"
+}
+variable "osdisk_type" {
+  description = "Tipo de almacenamiento del disco del sistema operativo de la máquina virtual"
+  type        = string
+  default     = "Standard_LRS"
+}
+variable "os_pub" {
+  description = "Editor de la imagen del sistema operativo de la máquina virtual"
+  type        = string
+  default     = "Canonical"
+}
+variable "os_version" {
+  description = "Versión de la imagen del sistema operativo de la máquina virtual"
+  type        = string
+  default     = "latest"
+}
+variable "os_sku" {
+  description = "Variante de la imagen del sistema operativo de la máquina virtual"
+  type        = string
+  default     = "22_04-lts-gen2"
+}
+variable "os_offer" {
+  description = "Distribución de la imagen del sistema operativo de la máquina virtual"
+  type        = string
+  default     = "0001-com-ubuntu-server-jammy"
 }
