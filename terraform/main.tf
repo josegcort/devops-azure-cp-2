@@ -6,10 +6,6 @@ module "resources" {
   tag = var.tag
 }
 
-########
-#Parte 1
-########
-
 #Declaracion del modulo storage
 module "storage" {
   source = "./modules/storage"
@@ -69,11 +65,6 @@ module "vm" {
   tag = var.tag
 }
 
-
-########
-#Parte 2
-########
-
 #Declaracion del modulo acr
 module "acr" {
   source = "./modules/acr"
@@ -81,6 +72,21 @@ module "acr" {
   # Injecta variables del modulo resources
   rg_location = module.resources.rg_location
   rg_name     = module.resources.rg_name
+
+  # Tag común para todos los recursos
+  tag = var.tag
+}
+
+#Declaracion del modulo aks
+module "aks" {
+  source = "./modules/aks"
+
+  # Injecta variables del modulo resources
+  rg_location = module.resources.rg_location
+  rg_name     = module.resources.rg_name
+
+  # Injecta variables del modulo acr
+  acr_id = module.acr.acr_id
 
   # Tag común para todos los recursos
   tag = var.tag
