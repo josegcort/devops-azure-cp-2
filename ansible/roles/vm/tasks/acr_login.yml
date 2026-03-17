@@ -1,6 +1,0 @@
-# Conecta al ACR con las credenciales de terraform
-- name: Iniciar sesion en el ACR
-  containers.podman.podman_login:
-    registry: "{{ acr_login_server }}"
-    username: "{{ acr_admin_username }}"
-    password: "{{ acr_admin_password }}"

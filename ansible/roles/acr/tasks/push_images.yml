@@ -1,0 +1,20 @@
+# Tarea para preparar las imagenes para el ACR
+- name: Build de la imagen
+  containers.podman.podman_image:
+    name: "{{ image.name }}"
+    path: "{{ image.source }}"
+    build:
+      format: docker
+    force: true
+
+- name: Tag de la imagen
+  containers.podman.podman_tag:
+    image: "{{ image.name }}:latest"
+    target_names:
+      - "{{ acr_login_server }}/{{ image.name }}:{{ image.tag }}"
+
+- name: Push de la imagen al ACR
+  containers.podman.podman_image:
+    name: "{{ acr_login_server }}/{{ image.name }}"
+    tag: "{{ image.tag }}"
+    push: true

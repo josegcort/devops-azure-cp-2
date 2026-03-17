@@ -1,10 +1,14 @@
 # Tarea para configurar la VM con Ansible y Nginx utilizando Podman
 
 - name: Actualizar repositorios APT e instalar Podman y dependencias
-  import_tasks: install_dependencies.yml
+  import_role:
+    name: common
+    tasks_from: install_podman.yml
 
 - name: Inicia sesion en el ACR con las credenciales de terraform
-  import_tasks: acr_login.yml
+  import_role:
+    name: common
+    tasks_from: acr_login.yml
 
 - name: Descarga y ejecuta la imagen de nginx desde el ACR
   import_tasks: deploy_container.yml
