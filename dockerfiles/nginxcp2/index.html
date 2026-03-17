@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Despliegue Exitoso</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --bg: #0d1117;
+            --surface: #161b22;
+            --border: #30363d;
+            --green: #3fb950;
+            --green-dim: #1a4226;
+            --orange: #e3832a;
+            --text: #e6edf3;
+            --muted: #8b949e;
+            --accent: #58a6ff;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Syne', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: .3;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            background: var(--green-dim);
+            border: 1px solid var(--green);
+            color: var(--green);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .75rem;
+            padding: .35rem .85rem;
+            border-radius: 999px;
+            margin-bottom: 1.5rem;
+            animation: fadeDown .6s ease both;
+        }
+
+        .status-pill::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--green);
+            animation: pulse 1.8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: .4;
+                transform: scale(.7);
+            }
+        }
+
+        h1 {
+            font-size: clamp(3rem, 7vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -.03em;
+            margin-bottom: .6rem;
+            animation: fadeDown .6s .1s ease both;
+        }
+
+        h1 span {
+            color: var(--accent);
+        }
+
+        .subtitle {
+            color: var(--muted);
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 2.5rem;
+            animation: fadeDown .6s .2s ease both;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            animation: fadeUp .6s .3s ease both;
+        }
+
+        @media (max-width: 520px) {
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.4rem 1.6rem;
+            position: relative;
+            overflow: hidden;
+            transition: border-color .2s, transform .2s;
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top left, rgba(88, 166, 255, .06), transparent 60%);
+            pointer-events: none;
+        }
+
+        .card-icon {
+            font-size: 1.7rem;
+            margin-bottom: .7rem;
+        }
+
+        .card-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.3rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            margin-bottom: .25rem;
+        }
+
+        .card-tool {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .card.terraform .card-tool {
+            color: #7b61ff;
+        }
+
+        .card.ansible .card-tool {
+            color: var(--orange);
+        }
+
+        .card-desc {
+            font-size: 1.5rem;
+            color: var(--muted);
+            margin-top: .4rem;
+            line-height: 1.5;
+        }
+
+        .footer {
+            margin-top: 2rem;
+            text-align: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .80rem;
+            color: var(--muted);
+            animation: fadeUp .6s .5s ease both;
+        }
+
+        .footer span {
+            color: var(--green);
+        }
+
+        @keyframes fadeDown {
+            from {
+                opacity: 0;
+                transform: translateY(-14px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(14px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 1em;
+            background: var(--green);
+            vertical-align: text-bottom;
+            animation: blink .9s step-end infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: 0
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+
+        <div class="status-pill">DEPLOY EXITOSO</div>
+
+        <h1>Infraestructura
+            <br>
+            <span>y configurración</span>
+            <br>
+            automatizada
+        </h1>
+        <p class="subtitle">
+            Este servidor fue aprovisionado y configurado de forma completamente automatizada.
+        </p>
+
+        <div class="cards">
+            <div class="card terraform">
+                <div class="card-icon">🏗️</div>
+                <div class="card-label">Infraestructura como Código</div>
+                <div class="card-tool">Terraform</div>
+                <div class="card-desc">
+                    Los recursos cloud (instancia, redes, almacenamiento, IPs) fueron creados y gestionados
+                    declarativamente
+                    con Terraform.
+                </div>
+            </div>
+            <div class="card ansible">
+                <div class="card-icon">⚙️</div>
+                <div class="card-label">Gestión de Configuración</div>
+                <div class="card-tool">Ansible</div>
+                <div class="card-desc">
+                    El sistema operativo, dependencias y servicios fueron configurados de manera automatizada con
+                    Ansible.
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            Desplegado con <span>Infrastructure as Code</span> - Terraform + Ansible - <span>DevOps UNIR</span>
+        </div>
+
+    </div>
+</body>
+
+</html>
