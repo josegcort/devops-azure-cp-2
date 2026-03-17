@@ -1,0 +1,10 @@
+# Descarga y ejecuta la imagen de nginx desde el ACR
+- name: Descargar y ejecutar contenedor de Nginx desde ACR
+  containers.podman.podman_container:
+    name: web
+    image: "{{ imagen_acr_1 }}"
+    state: started
+    recreate: yes
+    pull: always
+    ports:
+    - "80:80"

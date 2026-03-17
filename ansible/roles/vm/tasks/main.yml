@@ -1,33 +1,10 @@
 # Tarea para configurar la VM con Ansible y Nginx utilizando Podman
 
-# Actualiza los repositorios APT antes de instalar Podman
-- name: Actualizar repositorios APT
-  apt:
-    update_cache: yes
+- name: Actualizar repositorios APT e instalar Podman y dependencias
+  import_tasks: install_dependencies.yml
 
-# Instala Podman para gestionar los contenedores
-- name: Instalar Podman y dependencias
-  apt:
-    name:
-      - podman
-      - uidmap
-      - slirp4netns
-    state: present
+- name: Inicia sesion en el ACR con las credenciales de terraform
+  import_tasks: acr_login.yml
 
-# Conecta al ACR con las credenciales de terraform
-- name: Iniciar sesion en el registro de contenedores de Azure (ACR)
-  containers.podman.podman_login:
-    registry: "{{ acr_login_server }}"
-    username: "{{ acr_admin_username }}"
-    password: "{{ acr_admin_password }}"
-
-# Descarga y ejecuta la imagen de nginx desde el ACR
-- name: Descargar y ejecutar contenedor de Nginx desde ACR
-  containers.podman.podman_container:
-    name: web
-    image: "{{ imagen_acr_1 }}"
-    state: started
-    recreate: yes
-    pull: always
-    ports:
-    - "80:80"
+- name: Descarga y ejecuta la imagen de nginx desde el ACR
+  import_tasks: deploy_container.yml

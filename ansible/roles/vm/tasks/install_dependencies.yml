@@ -1,0 +1,13 @@
+# Actualiza los repositorios APT antes de instalar Podman
+- name: Actualizar repositorios APT
+  apt:
+    update_cache: true
+
+# Instala Podman para gestionar los contenedores
+- name: Instalar Podman y dependencias
+  apt:
+    name:
+      - podman
+      - uidmap
+      - slirp4netns
+    state: present
