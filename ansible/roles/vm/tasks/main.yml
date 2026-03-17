@@ -1,0 +1,38 @@
+# Tarea para configurar la VM con Ansible y Nginx utilizando Podman
+
+# Actualiza los repositorios APT antes de instalar Podman
+- name: Actualizar repositorios APT
+  apt:
+    update_cache: yes
+
+# Instala Podman para gestionar los contenedores
+- name: Instalar Podman y dependencias
+  apt:
+    name:
+      - podman
+      - uidmap
+      - slirp4netns
+    state: present
+
+# Crea un archivo para probar Nginx
+- name: Crear archivo index.html de prueba
+  ansible.builtin.copy:
+    dest: /home/{{ vm_username }}/index.html
+    content: |
+      <!DOCTYPE html>
+      <html>
+      <head><title>VM Podman</title></head>
+      <body><h1>Servidor Nginx configurado con Ansible</h1></body>
+      </html>
+    mode: '0644'
+
+# Crea un contenedor de Nginx utilizando Podman
+- name: Ejecutar contenedor Nginx
+  containers.podman.podman_container:
+    name: web
+    image: docker.io/library/nginx
+    state: started
+    ports:
+      - "80:80"
+    volume:
+    - /home/{{ vm_username }}/index.html:/usr/share/nginx/html/index.html:Z
