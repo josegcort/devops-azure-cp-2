@@ -1,3 +1,11 @@
+# Tarea para preparar las imagenes en el ACR
+- name: Build y push de imagenes al ACR
+  hosts: localhost
+  gather_facts: false
+  roles:
+    - acr
+
+# Tarea para configurar la VM con Ansible y Nginx utilizando Podman
 - hosts: vm
   become: true
   roles:

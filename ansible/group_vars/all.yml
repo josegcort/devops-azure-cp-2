@@ -1,0 +1,6 @@
+imagen_acr_1: nginxcp2
+
+images_acr:
+  - name: nginxcp2
+    source: "./roles/acr/dockerfiles/nginxcp2"
+    tag: "latest"

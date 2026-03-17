@@ -1,0 +1,18 @@
+# Tareas para el despliegue de imagenes en ACR
+
+- name: Actualizar repositorios APT e instalar Podman y dependencias
+  become: true
+  import_role:
+    name: common
+    tasks_from: install_podman.yml
+
+- name: Inicia sesion en el ACR con las credenciales de terraform
+  import_role:
+    name: common
+    tasks_from: acr_login.yml
+  
+- name: Procesar y pushear imagenes al ACR
+  include_tasks: push_images.yml
+  loop: "{{ images_acr }}"
+  loop_control:
+    loop_var: item
