@@ -1,3 +1,9 @@
+# Definición de par SSH para acceso seguro a la VM.
+resource "tls_private_key" "sshkey" {
+  algorithm = var.ssh_alg
+  rsa_bits  = var.ssh_bits
+}
+
 # Definición de la máquina virtual Linux
 resource "azurerm_linux_virtual_machine" "vm" {
   name                = var.vm_name
@@ -13,7 +19,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
   # Configuración de la clave SSH para la autenticación en la máquina virtual
   admin_ssh_key {
     username   = var.vm_username
-    public_key = file(var.ssh_pub_key)
+    public_key = tls_private_key.sshkey.public_key_openssh
   }
 
   # Configuración del disco del sistema operativo de la máquina virtual

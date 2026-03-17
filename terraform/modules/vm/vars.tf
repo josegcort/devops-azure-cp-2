@@ -1,6 +1,6 @@
 # Variables injectadas desde el main.main
 variable "tag" {
-  type        = string
+  type = string
 }
 
 #Variables injectadas del modulo resources
@@ -45,10 +45,15 @@ variable "vm_size" {
   type        = string
   default     = "Standard_B2s_v2"
 }
-variable "ssh_pub_key" {
-  description = "Ruta del archivo de clave pública SSH para la autenticación en la máquina virtual"
+variable "ssh_alg" {
+  description = "Algoritmo para la generacion del par SSH para la autenticación en la máquina virtual"
   type        = string
-  default     = "~/.ssh/vm.pub"
+  default     = "RSA"
+}
+variable "ssh_bits" {
+  description = "Número de bits para la generación del par SSH"
+  type        = number
+  default     = 4096
 }
 variable "osdisk_name" {
   description = "Nombre del disco del sistema operativo de la máquina virtual"
