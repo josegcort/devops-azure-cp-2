@@ -2,7 +2,7 @@
 - name: Descargar y ejecutar contenedor de Nginx desde ACR
   containers.podman.podman_container:
     name: web
-    image: "{{ imagen_acr_1 }}"
+    image: "{{ acr_login_server }}/{{ imagen_acr_1 }}:latest"
     state: started
     recreate: yes
     pull: always
