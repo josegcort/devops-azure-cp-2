@@ -4,11 +4,6 @@ variable "subscription_id" {
   type        = string
   sensitive   = true
 }
-variable "tenant_id" {
-  description = "TenantId de Azure para autenticar el proveedor"
-  type        = string
-  sensitive   = true
-}
 
 #Variables generales para la creación de recursos en Azure
 variable "tag" {
@@ -18,6 +13,7 @@ variable "tag" {
 }
 
 #Variables sensibles para el modulo vm
+#Credenciales para la autenticación del usuario de la VM
 variable "vm_username" {
   description = "Nombre del usuario administrador de la máquina virtual"
   type        = string

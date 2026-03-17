@@ -1,0 +1,7 @@
+# Variables sensibles
+# Credenciales para la autenticación con Azure
+subscription_id = "xxxxxxx-xxxx-xxxx-xxxx-xxxxx"#SubscriptionId de Azure para autenticar el proveedor
+
+# Credenciales para la autenticación del usuario de la VM
+vm_username     = "user"#Nombre del usuario administrador de la máquina virtual
+vm_password     = "*********"#Contraseña del usuario administrador de la máquina virtual
