@@ -14,25 +14,18 @@
       - slirp4netns
     state: present
 
-# Crea un archivo para probar Nginx
-- name: Crear archivo index.html de prueba
-  ansible.builtin.copy:
-    dest: /home/{{ vm_username }}/index.html
-    content: |
-      <!DOCTYPE html>
-      <html>
-      <head><title>VM Podman</title></head>
-      <body><h1>Servidor Nginx configurado con Ansible</h1></body>
-      </html>
-    mode: '0644'
+# Conecta al ACR con las credenciales de terraform
+- name: Iniciar sesion en el registro de contenedores de Azure (ACR)
+  containers.podman.podman_login:
+    registry: "{{ acr_login_server }}"
+    username: "{{ acr_admin_username }}"
+    password: "{{ acr_admin_password }}"
 
-# Crea un contenedor de Nginx utilizando Podman
-- name: Ejecutar contenedor Nginx
+# Descarga y ejecuta la imagen de nginx desde el ACR
+- name: Descargar y ejecutar contenedor de Nginx desde ACR
   containers.podman.podman_container:
     name: web
-    image: docker.io/library/nginx
+    image: "{{ imagen_acr_1 }}"
     state: started
     ports:
       - "80:80"
-    volume:
-    - /home/{{ vm_username }}/index.html:/usr/share/nginx/html/index.html:Z
