@@ -95,3 +95,4 @@ Thumbs.db
 *.iml
 
 terraform/outputs.json
+ansible/vm.pem
