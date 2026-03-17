@@ -2,6 +2,10 @@ output "acr_id" {
   description = "Id del Container Registry"
   value = azurerm_container_registry.acr.id
 }
+output "acr_name" {
+  description = "Nombre del Container Registry"
+  value = azurerm_container_registry.acr.name
+}
 output "acr_login_server" {
   description = "URL del Container Registry"
   value = azurerm_container_registry.acr.login_server

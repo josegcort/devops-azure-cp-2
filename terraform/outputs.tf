@@ -17,6 +17,10 @@ output "vm_username" {
 }
 
 #Valores de salida del modulo acr
+output "acr_name" {
+  description = "Nombre del Container Registry"
+  value       = module.acr.acr_name
+}
 output "acr_login_server" {
   description = "URL del Container Registry"
   value       = module.acr.acr_login_server
