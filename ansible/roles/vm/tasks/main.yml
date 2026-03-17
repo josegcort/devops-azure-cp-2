@@ -28,6 +28,6 @@
     image: "{{ imagen_acr_1 }}"
     state: started
     recreate: yes
-    pull: yes
+    pull: always
     ports:
     - "80:80"
