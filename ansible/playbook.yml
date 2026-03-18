@@ -5,8 +5,15 @@
   roles:
     - acr
 
-# Tarea para configurar la VM con Ansible y Nginx utilizando Podman
+# Tarea para configurar la VM para desplegar contenedor utilizando Podman
 - hosts: vm
   become: true
   roles:
     - vm
+
+# Tarea para configurar el AKS y desplegar contenedores
+- name: Configurar AKS
+  hosts: localhost
+  gather_facts: false
+  roles:
+    - aks
