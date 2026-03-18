@@ -2,9 +2,9 @@
 FROM docker.io/library/postgres:14-alpine
 
 # Variables de entorno por defecto (se sobreescriben en AKS con Secrets)
-ENV POSTGRES_USER=crud
-ENV POSTGRES_PASSWORD=crud*2026
-ENV POSTGRES_DB=crud
+ENV POSTGRES_USER=user
+ENV POSTGRES_PASSWORD=******
+ENV POSTGRES_DB=userdb
 
 EXPOSE 5432
 
