@@ -7,7 +7,3 @@ ENV POSTGRES_PASSWORD=******
 ENV POSTGRES_DB=userdb
 
 EXPOSE 5432
-
-# Copiar scripts de inicialización
-# PostgreSQL los ejecuta automáticamente al primer arranque
-# COPY init/*.sql /docker-entrypoint-initdb.d/
