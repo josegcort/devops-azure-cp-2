@@ -10,11 +10,8 @@
 - name: Crear secreto ACR
   import_tasks: secret.yml
 
-- name: Crear almacenamiento persistente
-  import_tasks: pvc.yml
+- name: Contenedorizar aplicación aplicacion persistente 
+  import_tasks: with_pvc.yml
 
-- name: Desplegar aplicación
-  import_tasks: deployment.yml
-
-- name: Exponer aplicación
-  import_tasks: service.yml
+- name: Contenedorizar aplicación aplicacion no persistente 
+  import_tasks: without_pvc.yml

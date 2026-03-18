@@ -1,0 +1,38 @@
+# Exponer contenedor con un servicio LoadBalancer
+- name: Crear servicio LoadBalancer
+  kubernetes.core.k8s:
+    kubeconfig: "{{ aks_kubeconfig_path }}"
+    state: present
+    definition:
+      apiVersion: v1
+      kind: Service
+      metadata:
+        name: "{{ item.service }}"
+        namespace: "{{ aks_namespace }}"
+      spec:
+        type: LoadBalancer
+        selector:
+          app: "{{ item.app }}"
+        ports:
+          - port: "{{ item.port_out }}"
+            targetPort: "{{ item.port_in }}"
+
+# Obtener IP pública del servicio 
+- name: Obtener IP pública del servicio
+  kubernetes.core.k8s_info:
+    kubeconfig: "{{ aks_kubeconfig_path }}"
+    kind: Service
+    name: "{{ item.service }}"
+    namespace: "{{ aks_namespace }}"
+  register: svc_info
+  retries: 10          # intenta 10 veces
+  delay: 15            # espera 15 segundos entre intentos
+  until: >
+    svc_info.resources | length > 0 and
+    svc_info.resources[0].status.loadBalancer.ingress is defined and
+    svc_info.resources[0].status.loadBalancer.ingress | length > 0
+    
+# Mostrar IP pública del servicio
+- name: Mostrar IP
+  debug:
+    msg: "IP pública: {{ svc_info.resources[0].status.loadBalancer.ingress[0].ip }}"

@@ -1,4 +1,4 @@
-# Tarea para crear el deployment sin PVC
+# Tarea para crear el deployment con PVC
 - name: Crear deployment
   kubernetes.core.k8s:
     kubeconfig: "{{ aks_kubeconfig_path }}"
@@ -26,3 +26,10 @@
                 image: "{{ acr_login_server }}/{{ item.name }}:{{ item.tag }}"
                 ports:
                   - containerPort: "{{ item.port_in }}"
+                volumeMounts:
+                  - mountPath: "{{ item.mount_path }}"
+                    name: "{{ item.storage }}"
+            volumes:
+              - name: "{{ item.storage }}"
+                persistentVolumeClaim:
+                  claimName: "{{ item.pvc }}"

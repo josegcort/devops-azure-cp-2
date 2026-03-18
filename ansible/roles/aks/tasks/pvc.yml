@@ -7,11 +7,11 @@
       apiVersion: v1
       kind: PersistentVolumeClaim
       metadata:
-        name: "{{ aks_pvc }}"
+        name: "{{ item.pvc }}"
         namespace: "{{ aks_namespace }}"
       spec:
         accessModes:
           - ReadWriteOnce
         resources:
           requests:
-            storage: 1Gi
+            storage: "{{ item.storage_size }}"

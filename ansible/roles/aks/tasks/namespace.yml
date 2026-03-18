@@ -1,4 +1,4 @@
-
+# Tarea para crear un namespace en AKS
 - name: Crear namespace en AKS
   kubernetes.core.k8s:
     kubeconfig: "{{ aks_kubeconfig_path }}"

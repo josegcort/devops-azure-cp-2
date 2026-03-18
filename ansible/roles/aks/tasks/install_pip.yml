@@ -3,28 +3,12 @@
   apt:
     update_cache: true
 
-# Instala python3-venv para crear un entorno virtual python
-- name: Instalar python3-venv
+# Instalar pip del sistema
+- name: Instalar python3-pip
   ansible.builtin.apt:
-    name: python3-venv
-    state: present
-  become: true
-
-# Crea un entorno virtual para instalar las dependencias de Kubernetes
-- name: Crear virtualenv
-  ansible.builtin.command:
-    cmd: python3 -m venv {{ venv_path }}
-    creates: "{{ venv_path }}"
-
-# Instala pip, setuptools, wheel y packaging en el virtualenv con ansible.builtin.command ya que no esta instalado pip en el virtualenv
-- name: Instalar dependencias base de python en el virtualenv
-  ansible.builtin.command: >
-    {{ venv_path }}/bin/pip install pip setuptools wheel packaging
-
-# Instala las dependencias de Kubernetes en el virtualenv
-- name: Instalar dependencias Kubernetes
-  ansible.builtin.pip:
     name:
-      - kubernetes
-      - openshift
-    virtualenv: "{{ venv_path }}"
+      - python3-pip
+      - python3-kubernetes
+    state: present
+    update_cache: true
+  become: true

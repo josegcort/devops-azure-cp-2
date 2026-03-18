@@ -1,0 +1,18 @@
+# Crear volumen y desplegar contenedor con PVC
+- name: Crear almacenamiento persistente
+  include_tasks: pvc.yml
+  loop: "{{ images_acr_1 }}"
+  loop_control:
+    loop_var: item
+
+- name: Desplegar aplicación
+  include_tasks: deployment_pvc.yml
+  loop: "{{ images_acr_1 }}"
+  loop_control:
+    loop_var: item
+
+- name: Exponer internamente aplicación
+  include_tasks: service_in.yml
+  loop: "{{ images_acr_2 }}"
+  loop_control:
+    loop_var: item

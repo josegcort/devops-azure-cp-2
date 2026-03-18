@@ -1,0 +1,18 @@
+# Exponer contenedor con un servicio ClusterIP
+- name: Crear servicio interno ClusterIP
+  kubernetes.core.k8s:
+    kubeconfig: "{{ aks_kubeconfig_path }}"
+    state: present
+    definition:
+      apiVersion: v1
+      kind: Service
+      metadata:
+        name: "{{ item.service }}"
+        namespace: "{{ aks_namespace }}"
+      spec:
+        type: ClusterIP
+        selector:
+          app: "{{ item.app }}"
+        ports:
+          - port: "{{ item.port_out }}"
+            targetPort: "{{ item.port_in }}"
