@@ -1,12 +1,18 @@
 # Desplegar y exponer contenedor sin PVC
+- name: Crear secreto para backend
+  include_tasks: secret_backend.yml
+  loop: "{{ image_backend }}"
+  loop_control:
+    loop_var: item
+
 - name: Desplegar contenedor backend
   include_tasks: deployment_backend.yml
-  loop: "{{ images_acr_2 }}"
+  loop: "{{ image_backend  }}"
   loop_control:
     loop_var: item
 
 - name: Exponer externamente contenedor backend con un servicio LoadBalancer
   include_tasks: service_backend.yml
-  loop: "{{ images_acr_2 }}"
+  loop: "{{ image_backend }}"
   loop_control:
     loop_var: item

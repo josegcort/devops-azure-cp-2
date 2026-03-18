@@ -26,7 +26,7 @@
                 image: "{{ acr_login_server }}/{{ item.name }}:{{ item.tag }}"
                 envFrom:
                   - secretRef:
-                      name: "{{ postgres_secret }}"
+                      name: "{{ item.secret }}"
                 ports:
                   - containerPort: "{{ item.port_in }}"
                 env:

@@ -1,21 +1,24 @@
 # Crear secretom volumen y desplega contenedor con PVC
 - name: Crear secreto para PostgreSQL
-  import_tasks: secret_postgres.yml
+  include_tasks: secret_postgres.yml
+  loop: "{{ image_postgres }}"
+  loop_control:
+    loop_var: item
 
 - name: Crear almacenamiento persistente para PostgreSQL
   include_tasks: pvc_postgres.yml
-  loop: "{{ images_acr_1 }}"
+  loop: "{{ image_postgres }}"
   loop_control:
     loop_var: item
 
 - name: Desplegar contenedor PostgreSQL con PVC
   include_tasks: deployment_postgres.yml
-  loop: "{{ images_acr_1 }}"
+  loop: "{{ image_postgres }}"
   loop_control:
     loop_var: item
 
 - name: Exponer internamente contenedor PostgreSQL con un servicio ClusterIP
   include_tasks: service_postgres.yml
-  loop: "{{ images_acr_2 }}"
+  loop: "{{ image_postgres }}"
   loop_control:
     loop_var: item

@@ -24,5 +24,8 @@
             containers:
               - name: "{{ item.app }}"
                 image: "{{ acr_login_server }}/{{ item.name }}:{{ item.tag }}"
+                envFrom:
+                  - secretRef:
+                      name: "{{ item.secret }}"
                 ports:
                   - containerPort: "{{ item.port_in }}"
