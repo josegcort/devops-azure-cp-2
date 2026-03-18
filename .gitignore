@@ -96,3 +96,4 @@ Thumbs.db
 
 terraform/outputs.json
 ansible/vm.pem
+ansible/kubeconfig
