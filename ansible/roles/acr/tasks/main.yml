@@ -11,7 +11,13 @@
     name: common
     tasks_from: acr_login.yml
 
-- name: Procesar y pushear imagenes al ACR
+- name: Procesar y pushear imagen postgres al ACR
+  include_tasks: push_images.yml
+  loop: "{{ images_acr_1 }}"
+  loop_control:
+    loop_var: item
+
+- name: Procesar y pushear imagen de Nginx al ACR
   include_tasks: push_images.yml
   loop: "{{ images_acr_2 }}"
   loop_control:
