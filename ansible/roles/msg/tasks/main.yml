@@ -1,0 +1,4 @@
+# Tarea para obtener y mostrar las direcciones IPs publicas de los servicios desplegados en AKS y VM
+
+- name: Obtener y mostrar las direcciones IPs publicas de los servicios desplegados en AKS y VM
+  import_tasks: get_public_ips.yml

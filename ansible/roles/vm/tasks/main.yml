@@ -12,6 +12,6 @@
 
 - name: Descarga y ejecuta la imagen de nginx desde el ACR
   include_tasks: deploy_container.yml
-  loop: "{{ images_acr_2 }}"
+  loop: "{{ image_nginx }}"
   loop_control:
     loop_var: item
