@@ -1,0 +1,4 @@
+# Tarea para obtener y almacenar en un archivolas direcciones IPs publicas de los contenedores desplegados en AKS y VM
+
+- name: Obtener las direcciones IPs publicas de los contenedores desplegados en AKS y VM
+  import_tasks: get_public_ips.yml

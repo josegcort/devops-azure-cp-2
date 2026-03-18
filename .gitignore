@@ -97,3 +97,4 @@ Thumbs.db
 terraform/outputs.json
 ansible/vm.pem
 ansible/kubeconfig
+ansible/report_ips.txt

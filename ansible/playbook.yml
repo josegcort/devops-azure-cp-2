@@ -19,9 +19,9 @@
   roles:
     - aks
 
-# Tarea para obtener y mostrar las direcciones IPs publicas de los servicios desplegados en AKS y VM
-- name: Muestrar direcciones IPs publicas de los servicios desplegados
+# Tarea para obtener y almacenar en un reporte las direcciones IPs publicas de los servicios desplegados en AKS y VM
+- name: Obtener y almacenar direcciones IPs publicas
   hosts: localhost
   gather_facts: false
   roles:
-    - msg
+    - report

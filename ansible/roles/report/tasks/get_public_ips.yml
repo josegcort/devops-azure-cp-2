@@ -1,0 +1,35 @@
+# Obtener IP pública del servicio LoadBalancer para el backend
+- name: Obtener IP pública del servicio
+  kubernetes.core.k8s_info:
+    kubeconfig: "{{ aks_kubeconfig_path }}"
+    kind: Service
+    name: "{{ image_backend[0].service }}"
+    namespace: "{{ aks_namespace }}"
+  register: svc_info
+  retries: 10
+  delay: 15
+  until: >
+    svc_info.resources | length > 0 and
+    svc_info.resources[0].status.loadBalancer.ingress is defined and
+    svc_info.resources[0].status.loadBalancer.ingress | length > 0
+
+# Crear o limpiar el archivo al inicio
+- name: Inicializar archivo de IPs
+  copy:
+    content: ""
+    dest: "{{ playbook_dir }}/report_ips.txt"
+    force: true
+
+# Escribir IP del backend
+- name: Guardar IP del backend
+  lineinfile:
+    path: "{{ playbook_dir }}/report_ips.txt"
+    line: "backend:   {{ svc_info.resources[0].status.loadBalancer.ingress[0].ip }}:{{ image_backend[0].port_out }}"
+    create: true
+
+# Escribir IP del nginx
+- name: Guardar IP del nginx
+  lineinfile:
+    path: "{{ playbook_dir }}/report_ips.txt"
+    line: "nginx:     {{ vm_public_ip }}:{{ image_nginx[0].port_out }}"
+    create: true
