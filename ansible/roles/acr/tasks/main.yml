@@ -10,6 +10,9 @@
   import_role:
     name: common
     tasks_from: acr_login.yml
-  
+
 - name: Procesar y pushear imagenes al ACR
-  import_tasks: push_images.yml
+  include_tasks: push_images.yml
+  loop: "{{ images_acr_2 }}"
+  loop_control:
+    loop_var: item

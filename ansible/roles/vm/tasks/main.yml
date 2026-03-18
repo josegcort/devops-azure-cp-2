@@ -11,4 +11,7 @@
     tasks_from: acr_login.yml
 
 - name: Descarga y ejecuta la imagen de nginx desde el ACR
-  import_tasks: deploy_container.yml
+  include_tasks: deploy_container.yml
+  loop: "{{ images_acr_2 }}"
+  loop_control:
+    loop_var: item

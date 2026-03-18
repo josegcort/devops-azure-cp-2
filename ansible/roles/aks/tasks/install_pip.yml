@@ -16,7 +16,7 @@
     cmd: python3 -m venv {{ venv_path }}
     creates: "{{ venv_path }}"
 
-# Instala pip, setuptools, wheel y packaging en el virtualenv con ansible.builtin.command
+# Instala pip, setuptools, wheel y packaging en el virtualenv con ansible.builtin.command ya que no esta instalado pip en el virtualenv
 - name: Instalar dependencias base de python en el virtualenv
   ansible.builtin.command: >
     {{ venv_path }}/bin/pip install pip setuptools wheel packaging

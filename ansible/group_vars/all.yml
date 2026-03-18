@@ -1,11 +1,14 @@
-imagen_acr_1_name: "nginxcp2"
-imagen_acr_1_path: "./roles/acr/dockerfiles/nginxcp2"
-imagen_acr_1_deploy: "nginxcp2-deployment"
-imagen_acr_1_tag: "latest"
+# Contenedor no requiere persistencia
+images_acr_2:
+  - name: nginxcp2
+    path: "./roles/acr/dockerfiles/nginxcp2"
+    deploy: "nginxcp2-deployment"
+    tag: "latest"
+    service: "nginxcp2-service"
 
 aks_namespace: "aks-ns"
 aks_secret: "acr-secret"
-aks_service: "acr-service"
+
 aks_pvc: "aks-pvc"
 aks_app: "aks-app"
 
