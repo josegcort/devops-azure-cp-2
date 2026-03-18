@@ -1,5 +1,5 @@
 # Contenedor requiere persistencia
-images_acr_1:
+image_postgres:
   - name: postgrescp2
     path: "./roles/acr/dockerfiles/postgrescp2"
     deploy: "postgrescp2-deployment"
@@ -14,9 +14,10 @@ images_acr_1:
     storage_size: 2Gi
     port_in: 5432
     port_out: 5432
+    secret: "postgrescp2-secret"
 
 # Contenedor no requiere persistencia
-images_acr_2:
+image_nginx:
   - name: nginxcp2
     path: "./roles/acr/dockerfiles/nginxcp2"
     deploy: "nginxcp2-deployment"
@@ -26,21 +27,22 @@ images_acr_2:
     port_in: 80
     port_out: 80
 
-# Contenedor no requiere persistencia
-images_acr_3:
-  - name: nginxcp2
-    path: "./roles/acr/dockerfiles/nginxcp2"
-    deploy: "nginxcp2-deployment"
+# Contenedor se conecta a postgres pero no requiere persistencia
+image_backend:
+  - name: backendcp2
+    path: "./roles/acr/dockerfiles/backendcp2"
+    deploy: "backendcp2-deployment"
     tag: "latest"
-    service: "nginxcp2-service"
-    app: "nginxcp2-app"
-    port_in: 80
-    port_out: 80
+    service: "backendcp2-service"
+    app: "backendcp2-app"
+    port_in: 8060
+    port_out: 8060
+    secret: "backendcp2-secret"
 
 # Variables para AKS
 aks_namespace: "aks-ns"
 aks_secret: "acr-secret"
-postgres_secret: "postgres-secret"
+
 
 # Autenticación para ACR en formato json
 dockerconfigjson: |

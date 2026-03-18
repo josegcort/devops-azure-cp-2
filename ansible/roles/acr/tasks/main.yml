@@ -13,12 +13,18 @@
 
 - name: Procesar y pushear imagen postgres al ACR
   include_tasks: push_images.yml
-  loop: "{{ images_acr_1 }}"
+  loop: "{{ image_postgres }}"
   loop_control:
     loop_var: item
 
 - name: Procesar y pushear imagen de Nginx al ACR
   include_tasks: push_images.yml
-  loop: "{{ images_acr_2 }}"
+  loop: "{{ image_nginx }}"
+  loop_control:
+    loop_var: item
+
+- name: Procesar y pushear imagen del Backend al ACR
+  include_tasks: push_images.yml
+  loop: "{{ image_backend }}"
   loop_control:
     loop_var: item
