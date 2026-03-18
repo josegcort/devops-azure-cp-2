@@ -1,4 +1,4 @@
-# Tareas para el despliegue de imagenes en ACR
+# Tareas para pushear las imagenes en el ACR
 
 - name: Actualizar repositorios APT e instalar Podman y dependencias
   become: true
@@ -12,7 +12,4 @@
     tasks_from: acr_login.yml
   
 - name: Procesar y pushear imagenes al ACR
-  include_tasks: push_images.yml
-  loop: "{{ images_acr }}"
-  loop_control:
-    loop_var: item
+  import_tasks: push_images.yml
