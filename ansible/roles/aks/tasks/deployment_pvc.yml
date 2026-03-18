@@ -24,8 +24,14 @@
             containers:
               - name: "{{ item.app }}"
                 image: "{{ acr_login_server }}/{{ item.name }}:{{ item.tag }}"
+                envFrom:
+                  - secretRef:
+                      name: "{{ postgres_secret }}"
                 ports:
                   - containerPort: "{{ item.port_in }}"
+                env:
+                  - name: "{{ item.env_name }}"
+                    value: "{{ item.env_value }}"
                 volumeMounts:
                   - mountPath: "{{ item.mount_path }}"
                     name: "{{ item.storage }}"

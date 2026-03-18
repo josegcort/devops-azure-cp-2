@@ -66,6 +66,8 @@ acr_admin_username=$ACR_ADMIN_USERNAME
 acr_admin_password=$ACR_ADMIN_PASSWORD
 aks_kubeconfig_path=.$PATH_KUBECONFIG
 venv_path=$PATH_ENV_PYTHON
+
+# Postgres
 postgres_user=crud
 postgres_password=crud*2026
 postgres_db=crud

@@ -1,4 +1,7 @@
-# Crear volumen y desplegar contenedor con PVC
+# Crear secretom volumen y desplega contenedor con PVC
+- name: Crear secreto para PostgreSQL
+  import_tasks: secret_postgres.yml
+
 - name: Crear almacenamiento persistente
   include_tasks: pvc.yml
   loop: "{{ images_acr_1 }}"

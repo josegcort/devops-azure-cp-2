@@ -8,6 +8,8 @@ images_acr_1:
     app: "postgrescp2-app"
     pvc: "postgrescp2-pvc"
     mount_path: "/var/lib/postgresql/data"
+    env_name: "PGDATA"
+    env_value: "/var/lib/postgresql/data/pgdata"
     storage: "postgrescp2-storage"
     storage_size: 2Gi
     port_in: 5432
@@ -38,6 +40,7 @@ images_acr_3:
 # Variables para AKS
 aks_namespace: "aks-ns"
 aks_secret: "acr-secret"
+postgres_secret: "postgres-secret"
 
 # Autenticación para ACR en formato json
 dockerconfigjson: |

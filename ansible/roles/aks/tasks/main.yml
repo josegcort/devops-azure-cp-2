@@ -8,7 +8,7 @@
   import_tasks: namespace.yml
 
 - name: Crear secreto ACR
-  import_tasks: secret.yml
+  import_tasks: secret_acr.yml
 
 - name: Contenedorizar aplicación aplicacion persistente 
   import_tasks: with_pvc.yml
