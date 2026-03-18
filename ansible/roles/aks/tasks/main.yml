@@ -1,0 +1,20 @@
+# Tareas para el despliegue de imagenes en el AKS
+
+- name: Actualizar repositorios APT e instalar librerías de python
+  become: true
+  import_tasks: install_pip.yml
+
+- name: Crear namespace
+  import_tasks: namespace.yml
+
+- name: Crear secreto ACR
+  import_tasks: secret.yml
+
+- name: Crear almacenamiento persistente
+  import_tasks: pvc.yml
+
+- name: Desplegar aplicación
+  import_tasks: deployment.yml
+
+- name: Exponer aplicación
+  import_tasks: service.yml

@@ -1,0 +1,17 @@
+
+- name: Crear PersistentVolumeClaim
+  kubernetes.core.k8s:
+    kubeconfig: "{{ aks_kubeconfig_path }}"
+    state: present
+    definition:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: "{{ aks_pvc }}"
+        namespace: "{{ aks_namespace }}"
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi

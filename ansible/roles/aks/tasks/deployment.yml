@@ -1,0 +1,35 @@
+---
+- name: Crear deployment
+  kubernetes.core.k8s:
+    kubeconfig: "{{ aks_kubeconfig_path }}"
+    state: present
+    definition:
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: "{{ imagen_acr_1_deploy }}"
+        namespace: "{{ aks_namespace }}"
+      spec:
+        replicas: 1
+        selector:
+          matchLabels:
+            app: "{{ aks_app }}"
+        template:
+          metadata:
+            labels:
+              app: "{{ aks_app }}"
+          spec:
+            imagePullSecrets:
+              - name: "{{ aks_secret }}"
+            containers:
+              - name: "{{ aks_app }}"
+                image: "{{ acr_login_server }}/{{ imagen_acr_1_name }}:{{ imagen_acr_1_tag }}"
+                ports:
+                  - containerPort: 3000
+                volumeMounts:
+                  - mountPath: "/data"
+                    name: storage
+            volumes:
+              - name: storage
+                persistentVolumeClaim:
+                  claimName: "{{ aks_pvc }}"

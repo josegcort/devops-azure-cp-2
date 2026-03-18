@@ -1,0 +1,10 @@
+
+- name: Crear namespace en AKS
+  kubernetes.core.k8s:
+    kubeconfig: "{{ aks_kubeconfig_path }}"
+    state: present
+    definition:
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: "{{ aks_namespace }}"

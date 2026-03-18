@@ -1,6 +1,21 @@
-imagen_acr_1: nginxcp2
+imagen_acr_1_name: "nginxcp2"
+imagen_acr_1_path: "./roles/acr/dockerfiles/nginxcp2"
+imagen_acr_1_deploy: "nginxcp2-deployment"
+imagen_acr_1_tag: "latest"
 
-images_acr:
-  - name: nginxcp2
-    source: "./roles/acr/dockerfiles/nginxcp2"
-    tag: "latest"
+aks_namespace: "aks-ns"
+aks_secret: "acr-secret"
+aks_service: "acr-service"
+aks_pvc: "aks-pvc"
+aks_app: "aks-app"
+
+dockerconfigjson: |
+  {
+    "auths": {
+      "{{ acr_login_server }}": {
+        "username": "{{ acr_admin_username }}",
+        "password": "{{ acr_admin_password }}",
+        "auth": "{{ (acr_admin_username + ':' + acr_admin_password) | b64encode }}"
+      }
+    }
+  }
