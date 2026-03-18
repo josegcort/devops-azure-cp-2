@@ -1,0 +1,12 @@
+# Desplegar y exponer contenedor sin PVC
+- name: Desplegar contenedor backend
+  include_tasks: deployment_backend.yml
+  loop: "{{ images_acr_2 }}"
+  loop_control:
+    loop_var: item
+
+- name: Exponer externamente contenedor backend con un servicio LoadBalancer
+  include_tasks: service_backend.yml
+  loop: "{{ images_acr_2 }}"
+  loop_control:
+    loop_var: item

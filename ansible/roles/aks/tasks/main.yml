@@ -4,14 +4,14 @@
   become: true
   import_tasks: install_pip.yml
 
-- name: Crear namespace
+- name: Crear namespace en AKS
   import_tasks: namespace.yml
 
-- name: Crear secreto ACR
+- name: Crear secreto ACR en AKS para hacer pull de imagenes privadas
   import_tasks: secret_acr.yml
 
-- name: Contenedorizar aplicación aplicacion persistente 
-  import_tasks: with_pvc.yml
+- name: Contenedorizar y desplegar postgres
+  import_tasks: deploy_postgres.yml
 
-- name: Contenedorizar aplicación aplicacion no persistente 
-  import_tasks: without_pvc.yml
+- name: Contenedorizar y desplegar backend
+  import_tasks: deploy_backend.yml

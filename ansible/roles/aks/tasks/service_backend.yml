@@ -1,4 +1,4 @@
-# Exponer contenedor con un servicio LoadBalancer
+# Exponer publicamente contenedor backend con un servicio LoadBalancer para el backend
 - name: Crear servicio LoadBalancer
   kubernetes.core.k8s:
     kubeconfig: "{{ aks_kubeconfig_path }}"

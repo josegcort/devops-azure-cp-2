@@ -1,4 +1,4 @@
-# Tarea para crear el deployment con PVC
+# Tarea para crear el deployment de postgres en AKS
 - name: Crear deployment
   kubernetes.core.k8s:
     kubeconfig: "{{ aks_kubeconfig_path }}"

@@ -1,4 +1,4 @@
-# Exponer contenedor con un servicio ClusterIP
+# Exponer localmente el contenedor postgres con un servicio ClusterIP 
 - name: Crear servicio interno ClusterIP
   kubernetes.core.k8s:
     kubeconfig: "{{ aks_kubeconfig_path }}"
